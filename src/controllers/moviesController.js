@@ -21,7 +21,9 @@ const moviesController = {
             })
     },
     'detail': (req, res) => {
-        db.Movie.findByPk(req.params.id)
+        db.Movie.findByPk(req.params.id, {
+            include :   ["genre", "actors"]
+        })
             .then(movie => {
                 res.render('moviesDetail.ejs', {movie});
             });
@@ -52,21 +54,91 @@ const moviesController = {
     },
     //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
-        return res.render("moviesAdd")
+        db.Genre.findAll().then(function(genres) { // Obtener los géneros de las películas de la base de datos
+            return res.render("moviesAdd", { // Pasar los géneros como datos adicionales a la vista
+                genres: genres
+            });
+        }).catch((error) => console.log(error));
     },
     create: function (req,res) {
 
-    },
-    edit: function(req,res) {
+        db.Movie.create({
+            title: req.body.title,
+            rating: req.body.rating,
+            awards: req.body.awards,
+            length: req.body.length,
+            genre_id: req.boyd.genre_id
+        }).then(() => {
+            res.redirect('/movies');
+        }).catch(error => console.log(error))
 
     },
+    edit: function(req,res) {
+        const movie = db.Movie.findByPk(req.params.id)
+
+        const allGenres = db.Genre.findAll()
+
+        Promise.all([movie, allGenres]) // El array debe ser el mismo orden
+            .then(([movie, allGenres]) => {   // El array debe ser el mismo orden
+                return res.render("moviesEdit", {
+                    Movie : {
+                        ...movie.dataValues,
+                        release_date : movie.release_date.toISOString().split("T")[0]
+                    },
+                    allGenres
+                })
+            }).catch(error => console.log(error))
+            
+    },
     update: function (req,res) {
+
+        db.Movie.update(
+            {
+                ...req.body
+            },
+            {
+                where : {
+                    id : req.params.id
+                }
+            }
+        )
+        .then(() => res.redirect("/movies/detail/" + req.params.id))
+        .catch((error) => console.log(error))
 
     },
     delete: function (req,res) {
 
+        db.Movie.findByPk(req.params.id)
+            .then(movie => {
+                res.render('moviesDelete', {Movie : movie});
+            })
+            .catch((error) => console.log(error))
+
     },
     destroy: function (req,res) {
+        db.Actor.update(
+            {
+                favorite_movie_id : null
+            },{
+                where : {
+                    favorite_movie_id : req.params.id
+                },
+            }
+        ).then( () => {
+            db.Actor_Movie.destroy({
+                where : {
+                    movie_id : req.params.id
+                }
+            }).then(() => {
+                db.Movie.destroy(
+                    {
+                        where : {
+                            id : req.params.id
+                        }
+                    }
+                ).then(() => res.redirect("/movies"))
+        })
+        }).catch((error) => console.log(error))
 
     }
 }
