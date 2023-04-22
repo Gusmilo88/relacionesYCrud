@@ -2,6 +2,8 @@ const path = require('path');
 const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
+const {validationResult} = require("express-validator");
+
 
 
 //Aqui tienen una forma de llamar a cada uno de los modelos
@@ -68,13 +70,15 @@ const moviesController = {
     },
 
     create: function (req,res) {
+
+        const errors = validationResult(req);
         
         db.Movie.create({
             title : req.body.title,
             rating : req.body.rating,
-            length : req.body.length,
             awards : req.body.awards,
             release_date : req.body.release_date,
+            length : req.body.length,
         }).then(function(){
 
             return res.redirect("/movies")
