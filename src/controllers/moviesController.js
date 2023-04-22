@@ -54,25 +54,24 @@ const moviesController = {
     },
     //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
-        db.Genre.findAll().then(function(genres) { // Obtener los géneros de las películas de la base de datos
-            return res.render("moviesAdd", { // Pasar los géneros como datos adicionales a la vista
-                genres: genres
+
+        const allGenres = db.Genre.findAll()
+
+        .then(allGenres => {
+            return res.render("moviesAdd", {
+                allGenres
             });
-        }).catch((error) => console.log(error));
+        })
+        .catch(error => {
+            console.log(error);
+        });
     },
+
     create: function (req,res) {
-
-        db.Movie.create({
-            title: req.body.title,
-            rating: req.body.rating,
-            awards: req.body.awards,
-            length: req.body.length,
-            genre_id: req.boyd.genre_id
-        }).then(() => {
-            res.redirect('/movies');
-        }).catch(error => console.log(error))
-
+        
+        
     },
+
     edit: function(req,res) {
         const movie = db.Movie.findByPk(req.params.id)
 

@@ -21,24 +21,46 @@ figure{
 .titulo{
   text-align: center;
 }
-.botonAgregar , .botonModificar{
-  color: white;
-  background-color: green;
-  padding: 10px;
-  border-radius: 10px;
+.botonAgregar{
+      background: linear-gradient(to right, #09a304, #0cc118);
+      border-radius: 7px;
+      margin: 10px;
+      box-shadow: 0px 7.27273px 2.90909px rgba(0, 0, 0, 0.4);
+      border: none;
+      padding: 10px;
+      color: rgb(18, 0, 0);
 }
+
 .botonBorrar{
-  color: white;
-  background-color: red;
-  padding: 10px;
-  border-radius: 10px;
+      background: linear-gradient(to right, #ff7f50, #ff0000);
+      border-radius: 7px;
+      margin: 10px;
+      box-shadow: 0px 7.27273px 2.90909px rgba(0, 0, 0, 0.4);
+      border: none;
+      padding: 10px;
+      color: rgb(18, 0, 0);
 }
-.botonVolver{
-  color: white;
-  background-color: #00B7FF;
-  padding: 10px;
-  border-radius: 10px;
+
+.botonEditar, .botonModificar{
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 100%);
+      border-radius: 7px;
+      margin: 10px;
+      box-shadow: 0px 7.27273px 2.90909px rgba(0, 0, 0, 0.4);
+      border: none;
+      padding: 10px;
+      color: rgb(18, 0, 0);
 }
+
+.botonInicio{
+      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(235,255,0,1) 0%, rgba(101,121,9,1) 100%);
+      border-radius: 7px;
+      margin: 10px;
+      box-shadow: 0px 7.27273px 2.90909px rgba(0, 0, 0, 0.4);
+      border: none;
+      padding: 10px;
+      color: rgb(18, 0, 0);
+}
+
 .formulario{
   margin: auto;
   width: 20%;

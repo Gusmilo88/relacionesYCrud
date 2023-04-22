@@ -34,8 +34,11 @@
     
     <section>
         <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
-        <a class="botonVolver" href="/movies/edit/<%= movie.id %>">Editar</a>
+        <button class="botonEditar" type="submit"><a href="/movies/edit/<%= movie.id %>">Editar</a></button>
         <button class="botonBorrar" type="submit"><a href="/movies/delete/<%= movie.id %>">Eliminar</a></button>
+        <button class="botonAgregar" type="submit"><a href="/movies/add">Agregar</a></button>
+        <button class="botonInicio" type="submit"><a href="/movies">Lista de películas</a></button>
+
 
     </section>
 
