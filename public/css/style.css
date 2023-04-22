@@ -52,13 +52,17 @@ figure{
 }
 
 .botonInicio{
-      background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(235,255,0,1) 0%, rgba(101,121,9,1) 100%);
+      background: linear-gradient(90deg, rgb(202, 255, 42) 0%, rgb(220, 248, 11) 0%, rgb(179, 165, 6) 100%);
       border-radius: 7px;
       margin: 10px;
       box-shadow: 0px 7.27273px 2.90909px rgba(0, 0, 0, 0.4);
       border: none;
       padding: 10px;
       color: rgb(18, 0, 0);
+}
+
+.linkBotones{
+  color: white;
 }
 
 .formulario{

@@ -69,7 +69,18 @@ const moviesController = {
 
     create: function (req,res) {
         
-        
+        db.Movie.create({
+            title : req.body.title,
+            rating : req.body.rating,
+            length : req.body.length,
+            awards : req.body.awards,
+            release_date : req.body.release_date,
+        }).then(function(){
+
+            return res.redirect("/movies")
+            
+        }).catch(error => console.log(error))
+    
     },
 
     edit: function(req,res) {
